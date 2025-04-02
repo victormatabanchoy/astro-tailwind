@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "nombre": "iPhone 12",
+    "categoria": "celulares",
+    "precio": "2.400.000",
+    "imagen": "/images/iphone 12.jpeg",
+    "descripcion": "Último modelo de Apple 12 con cámara profesional."
+  },
+  {
+    "id": 2,
+    "nombre": "iPhone 14",
+    "categoria": "celulares",
+    "precio": "2.999.000",
+    "imagen": "/images/iphone 14.jpeg",
+    "descripcion": "Potente iphone con pantalla AMOLED y cámara de 108MP."
+  },
+  {
+    "id": 3,
+    "nombre": "iPhone 15",
+    "categoria": "celulares",
+    "precio": "4.999.000",
+    "imagen": "/images/iphone 15.jpeg",
+    "descripcion": "Potente iphone con pantalla AMOLED y cámara de 120MP."
+  },
+  {
+    "id": 4,
+    "nombre": "MacBook Pro M1",
+    "categoria": "portatiles",
+    "precio": "5.800.000",
+    "imagen": "/images/laptop 1.jpeg",
+    "descripcion": "Portátil ultraligero con el potente chip M1 y 13 pulgadas."
+  },
+  {
+    "id": 5,
+    "nombre": "Dell XPS 15",
+    "categoria": "portatiles",
+    "precio": "4.500.000",
+    "imagen": "/images/laptop 2.jpeg",
+    "descripcion": "Portátil premium con pantalla InfinityEdge y procesador Intel i7."
+  },
+  {
+    "id": 6,
+    "nombre": "Dell XPS 15",
+    "categoria": "portatiles",
+    "precio": "4.500.000",
+    "imagen": "/images/laptop 3.jpeg",
+    "descripcion": "Portátil premium con pantalla InfinityEdge y procesador Intel i7."
+  },
+  {
+    "id": 7,
+    "nombre": "Apple Watch Series 7",
+    "categoria": "relojes",
+    "precio": "1.800.000",
+    "imagen": "/images/reloj 1.jpeg",
+    "descripcion": "Monitorea tu salud y actividad con el mejor smartwatch del mercado."
+  },
+  {
+    "id": 8,
+    "nombre": "Samsung Galaxy Watch 4",
+    "categoria": "relojes",
+    "precio": "1.200.000",
+    "imagen": "/images/reloj 2.jpeg",
+    "descripcion": "Elegante reloj inteligente con medición de composición corporal."
+  },
+  {
+    "id": 9,
+    "nombre": "Samsung Galaxy Watch 4",
+    "categoria": "relojes",
+    "precio": "1.200.000",
+    "imagen": "/images/reloj 3.jpeg",
+    "descripcion": "Elegante reloj inteligente con medición de composición corporal."
+  },
+  {
+    "id": 10,
+    "nombre": "iPad Pro 2021",
+    "categoria": "tablets",
+    "precio": "3.200.000",
+    "imagen": "/images/tablet 1.jpeg",
+    "descripcion": "Potencia y versatilidad con el chip M1 y pantalla Liquid Retina XDR."
+  },
+  {
+    "id": 11,
+    "nombre": "Samsung Galaxy Tab S7",
+    "categoria": "tablets",
+    "precio": "2.800.000",
+    "imagen": "/images/tablet 2.jpeg",
+    "descripcion": "Tablet premium con S Pen incluido y pantalla de 120Hz."
+  },
+  {
+    "id": 12,
+    "nombre": "Samsung Galaxy Tab S8",
+    "categoria": "tablets",
+    "precio": "2.800.000",
+    "imagen": "/images/tablet 3.jpeg",
+    "descripcion": "Tablet premium con S Pen incluido y pantalla de 120Hz."
+  }
+]

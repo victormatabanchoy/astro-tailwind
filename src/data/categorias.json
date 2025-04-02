@@ -1,0 +1,22 @@
+[
+  {
+    "id": "celulares",
+    "nombre": "Smartphones",
+    "icono": "phone"
+  },
+  {
+    "id": "portatiles",
+    "nombre": "Portátiles",
+    "icono": "laptop"
+  },
+  {
+    "id": "relojes",
+    "nombre": "Smartwatches",
+    "icono": "watch"
+  },
+  {
+    "id": "tablets",
+    "nombre": "Tablets",
+    "icono": "tablet"
+  }
+]

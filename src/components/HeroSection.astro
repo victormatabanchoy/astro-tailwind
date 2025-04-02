@@ -1,0 +1,80 @@
+<!-- src/components/HeroSection.astro -->
+<section class="relative bg-black text-white overflow-hidden">
+  <!-- Efectos de fondo  -->
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-blue-900/40"
+  >
+  </div>
+  <div class="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-20">
+  </div>
+
+  <!-- Círculos de luz -->
+  <div
+    class="absolute top-20 left-20 w-60 h-60 bg-purple-600 rounded-full filter blur-3xl opacity-20 animate-pulse"
+  >
+  </div>
+  <div
+    class="absolute bottom-10 right-10 w-80 h-80 bg-blue-600 rounded-full filter blur-3xl opacity-20 animate-pulse"
+    style="animation-delay: 1s;"
+  >
+  </div>
+
+  <!-- Contenido -->
+  <div class="container mx-auto px-4 py-20 md:py-32 relative z-10">
+    <div class="flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 space-y-6">
+        <h1 class="text-4xl md:text-6xl font-bold">
+          <span class="block">El Futuro de la</span>
+          <span
+            class="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent"
+            >Tecnología</span
+          >
+          <span class="block">Está Aquí</span>
+        </h1>
+        <p class="text-gray-300 text-xl max-w-md">
+          Descubre los dispositivos más avanzados con diseños  y de
+          última tecnología.
+        </p>
+        <div class="flex space-x-4">
+          <a
+            href="/productos/celulares"
+            class="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full font-medium hover:opacity-90 transition duration-200 transform hover:scale-105"
+          >
+            Explorar
+          </a>
+          <a
+            href="#destacados"
+            class="px-8 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full font-medium hover:bg-white/20 transition duration-200"
+          >
+            Destacados
+          </a>
+        </div>
+      </div>
+
+      <div class="md:w-1/2 mt-10 md:mt-0 relative">
+        <div
+          class="relative z-10 transform rotate-3 hover:rotate-0 transition duration-500"
+        >
+          <img
+            src="/public/images/inicio-removebg.png"
+            alt="Smartphone Futurista"
+            class="rounded-lg shadow-2xl max-w-xs mx-auto"
+          />
+          <div
+            class="absolute inset-0 border-2 border-purple-500/50 rounded-lg -m-3 -rotate-3"
+          >
+          </div>
+        </div>
+        <!-- Elementos decorativos -->
+        <div
+        class="absolute top-1/3 right-1/4 w-16 h-16 border-2 border-blue-500/50 rounded-full animate-spin-slow"
+        >
+        </div>
+        <div
+          class="absolute bottom-1/4 left-1/3 w-8 h-8 bg-purple-500/30 rounded-full animate-ping-slow"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

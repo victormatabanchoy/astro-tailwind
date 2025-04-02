@@ -1,0 +1,302 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import productos from "../../data/productos.json";
+
+// Get the product id from the URL
+export async function getStaticPaths() {
+  return productos.map((producto) => ({
+    params: { id: producto.id.toString() },
+    props: { producto },
+  }));
+}
+
+const { producto } = Astro.props;
+
+// Formatear precio para visualización
+const precioFormateado = new Intl.NumberFormat("es-CO", {
+  style: "currency",
+  currency: "COP",
+  minimumFractionDigits: 0,
+}).format(Number(producto.precio.replace(/\./g, "")));
+
+// Obtener productos relacionados (misma categoría, excepto el actual)
+const productosRelacionados = productos
+  .filter((p) => p.categoria === producto.categoria && p.id !== producto.id)
+  .slice(0, 4);
+---
+
+<!-- src/pages/producto/[id].astro -->
+<MainLayout title={producto.nombre}>
+  <!-- Sección de detalle de producto -->
+  <section class="py-12 bg-gray-50 dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <nav class="flex mb-8 text-sm">
+        <a
+          href="/"
+          class="text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+          >Inicio</a
+        >
+        <span class="mx-2 text-gray-500 dark:text-gray-400">/</span>
+        <a
+          href={`/productos/${producto.categoria}`}
+          class="text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+          >{
+            producto.categoria.charAt(0).toUpperCase() +
+              producto.categoria.slice(1)
+          }</a
+        >
+        <span class="mx-2 text-gray-500 dark:text-gray-400">/</span>
+        <span class="text-gray-700 dark:text-gray-300">{producto.nombre}</span>
+      </nav>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+        <!-- Galería de producto -->
+        <div class="space-y-4">
+          <div
+            class="relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg aspect-square"
+          >
+            <img
+              src={producto.imagen}
+              alt={producto.nombre}
+              class="w-full h-full object-contain p-8"
+            />
+            <!-- Badge de categoría -->
+            <div class="absolute top-4 left-4">
+              <span
+                class="px-2 py-1 text-xs rounded-full bg-black/70 text-white backdrop-blur-sm font-medium"
+              >
+                {
+                  producto.categoria.charAt(0).toUpperCase() +
+                    producto.categoria.slice(1)
+                }
+              </span>
+            </div>
+          </div>
+
+          <!-- Miniaturas (simuladas) -->
+          <div class="grid grid-cols-4 gap-2">
+            {
+              [1, 2, 3, 4].map(() => (
+                <button class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-purple-500 transition">
+                  <img
+                    src={producto.imagen}
+                    alt={producto.nombre}
+                    class="w-full h-24 object-contain p-2"
+                  />
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Información de producto -->
+        <div class="space-y-6">
+          <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+            {producto.nombre}
+          </h1>
+
+          <div class="flex items-center space-x-2">
+            <div class="flex text-yellow-400">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span class="text-gray-600 dark:text-gray-400">(24 reseñas)</span>
+          </div>
+
+          <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
+            <p class="text-3xl font-bold text-purple-600 dark:text-purple-400">
+              {precioFormateado}
+            </p>
+            <p class="text-green-600 dark:text-green-400 mt-1">
+              <i class="fas fa-check-circle mr-1"></i> En stock
+            </p>
+          </div>
+
+          <div
+            class="space-y-4 border-t border-gray-200 dark:border-gray-700 pt-6"
+          >
+            <p class="text-gray-700 dark:text-gray-300">
+              {producto.descripcion}
+            </p>
+
+            <!-- Características simuladas -->
+            <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                <span>Garantía de 2 años</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                <span>Envío gratis a todo el país</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                <span>30 días para devoluciones</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                <span>Soporte técnico incluido</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Opciones de compra -->
+          <div
+            class="border-t border-gray-200 dark:border-gray-700 pt-6 space-y-4"
+          >
+            <!-- Selector de cantidad -->
+            <div class="flex items-center space-x-4">
+              <label class="text-gray-700 dark:text-gray-300 font-medium"
+                >Cantidad:</label
+              >
+              <div
+                class="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg"
+              >
+                <button
+                  class="px-3 py-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <span
+                  class="px-4 py-1 border-x border-gray-300 dark:border-gray-600"
+                  >1</span
+                >
+                <button
+                  class="px-3 py-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="flex flex-col sm:flex-row gap-4">
+              <button
+                class="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:opacity-90 transition flex items-center justify-center"
+              >
+                <i class="fas fa-shopping-cart mr-2"></i> Añadir al carrito
+              </button>
+              <button
+                class="flex-1 bg-gray-900 dark:bg-gray-700 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-600 transition flex items-center justify-center"
+              >
+                <i class="fas fa-bolt mr-2"></i> Comprar ahora
+              </button>
+            </div>
+
+            <!-- Botones secundarios -->
+            <div class="flex space-x-4 pt-2">
+              <button
+                class="flex items-center text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+              >
+                <i class="far fa-heart mr-2"></i> Añadir a favoritos
+              </button>
+              <button
+                class="flex items-center text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
+              >
+                <i class="fas fa-share-alt mr-2"></i> Compartir
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de pestañas -->
+  <section class="py-12 bg-white dark:bg-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="border-b border-gray-200 dark:border-gray-700">
+        <nav class="flex space-x-8">
+          <button
+            class="border-b-2 border-purple-600 text-purple-600 dark:text-purple-400 py-4 px-1 font-medium"
+          >
+            Descripción
+          </button>
+          <button
+            class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 py-4 px-1 font-medium"
+          >
+          </button>
+        </nav>
+
+        <div class="py-6">
+          <div
+            class="prose prose-lg max-w-none text-gray-700 dark:text-gray-300"
+          >
+            <p>
+              El {producto.nombre} representa lo último en innovación tecnológica,
+              combinando un diseño elegante con un rendimiento excepcional.
+            </p>
+
+            <p>
+              Este dispositivo está diseñado para satisfacer las necesidades de
+              los usuarios más exigentes, ofreciendo una experiencia fluida y
+              versátil para trabajo y entretenimiento.
+            </p>
+
+            <p>
+              Con su tecnología de vanguardia, el {producto.nombre} establece un
+              nuevo estándar en su categoría, proporcionando características avanzadas
+              como:
+            </p>
+
+            <ul>
+              <li>Rendimiento superior para multitarea</li>
+              <li>Diseño premium con materiales de alta calidad</li>
+              <li>Batería de larga duración para uso durante todo el día</li>
+              <li>Capacidades avanzadas de conectividad</li>
+              <li>Sistema de cámaras de última generación</li>
+            </ul>
+
+            <p>
+              Ya sea que necesites un dispositivo para trabajo, creatividad o
+              entretenimiento, el {producto.nombre} ofrece la combinación perfecta
+              de estilo, funcionalidad y potencia.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Productos relacionados -->
+    <section class="py-12 bg-gray-50 dark:bg-gray-900">
+      <div class="container mx-auto px-4">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+          Productos relacionados
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {
+            productosRelacionados.map((productoRel) => (
+              <a href={`/producto/${productoRel.id}`} class="group">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition overflow-hidden">
+                  <div class="h-48 overflow-hidden">
+                    <img
+                      src={productoRel.imagen}
+                      alt={productoRel.nombre}
+                      class="w-full h-full object-cover object-center transform group-hover:scale-105 transition duration-300"
+                    />
+                  </div>
+                  <div class="p-4">
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-1 line-clamp-1">
+                      {productoRel.nombre}
+                    </h3>
+                    <p class="text-purple-600 dark:text-purple-400 font-bold">
+                      {new Intl.NumberFormat("es-CO", {
+                        style: "currency",
+                        currency: "COP",
+                        minimumFractionDigits: 0,
+                      }).format(Number(productoRel.precio.replace(/\./g, "")))}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </section>
+</MainLayout>

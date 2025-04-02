@@ -1,0 +1,88 @@
+---
+export interface Props {
+  id: number;
+  nombre: string;
+  precio: string;
+  imagen: string;
+  categoria: string;
+}
+
+const { id, nombre, precio, imagen, categoria } = Astro.props;
+
+// Formatear precio para visualización
+const precioFormateado = new Intl.NumberFormat("es-CO", {
+  style: "currency",
+  currency: "COP",
+  minimumFractionDigits: 0,
+}).format(Number(precio.replace(/\./g, "")));
+---
+
+<!-- src/components/ProductCard.astro -->
+<div class="group">
+  <div
+    class="relative overflow-hidden bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2"
+  >
+    <!-- Badge de categoría -->
+    <div class="absolute top-3 left-3 z-10">
+      <span
+        class="px-2 py-1 text-xs rounded-full bg-black/70 text-white backdrop-blur-sm font-medium"
+      >
+        {categoria.charAt(0).toUpperCase() + categoria.slice(1)}
+      </span>
+    </div>
+
+    <!-- Imagen del producto -->
+    <div class="h-56 overflow-hidden">
+      <img
+        src={imagen}
+        alt={nombre}
+        class="w-full h-full object-cover object-center transform group-hover:scale-110 transition duration-500"
+      />
+    </div>
+
+    <!-- Información del producto -->
+    <div class="p-5">
+      <h3
+        class="text-lg font-semibold text-gray-800 dark:text-white mb-2 line-clamp-1"
+      >
+        {nombre}
+      </h3>
+      <p class="text-xl font-bold text-purple-600 dark:text-purple-400 mb-3">
+        {precioFormateado}
+      </p>
+
+      <div class="flex space-x-2">
+        <a
+          href={`/producto/${id}`}
+          class="flex-1 py-2 px-4 bg-gray-100 dark:bg-gray-700 rounded-lg text-center text-gray-700 dark:text-white text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+        >
+          Ver detalles
+        </a>
+        <button
+          class="p-2 bg-purple-600 hover:bg-purple-700 rounded-lg text-white transition"
+          aria-label="Añadir al carrito"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Efecto de borde brillante al hover -->
+    <div
+      class="absolute inset-0 border border-transparent group-hover:border-purple-500/50 rounded-xl pointer-events-none transition duration-300"
+    >
+    </div>
+  </div>
+</div>

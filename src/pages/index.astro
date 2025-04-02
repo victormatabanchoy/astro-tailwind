@@ -1,11 +1,314 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import MainLayout from "../layouts/MainLayout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import ProductCard from "../components/ProductoCard.astro";
+import productos from "../data/productos.json";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Obtener productos destacados (12 produsctos)
+const productosDestacados = productos.slice(0, 12);
+
+// Obtener productos por categoría para las secciones
+const celulares = productos.filter((p) => p.categoria === "celulares");
+const portatiles = productos.filter((p) => p.categoria === "portatiles");
+const tablets = productos.filter((p) => p.categoria === "tablets");
+const relojes = productos.filter((p) => p.categoria === "relojes");
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!-- src/pages/index.astro -->
+<MainLayout title="TechFusion">
+  <HeroSection />
+
+  <!-- Sección de Productos Destacados -->
+  <section
+    id="destacados"
+    class="py-16 bg-gradient-to-b from-gray-900 to-gray-800"
+  >
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-white">
+          Productos <span class="text-purple-500">Destacados</span>
+        </h2>
+        <p class="text-gray-400 mt-3 max-w-2xl mx-auto">
+          Descubre nuestros productos más populares y de última tecnología.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {productosDestacados.map((producto) => <ProductCard {...producto} />)}
+      </div>
+
+      <div class="text-center mt-10">
+        <a
+          href="/productos/celulares"
+          class="inline-block px-8 py-3 border border-purple-500 text-purple-500 rounded-full hover:bg-purple-500 hover:text-white transition duration-300"
+        >
+          Ver todos los productos
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Características -->
+  <section class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+          ¿Por qué elegirnos?
+        </h2>
+        <p class="text-gray-600 dark:text-gray-400 mt-3 max-w-2xl mx-auto">
+          Ofrecemos una experiencia de compra futurista con beneficios
+          exclusivos.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Característica 1 -->
+        <div
+          class="bg-white dark:bg-gray-700 rounded-xl p-8 shadow-lg border border-gray-100 dark:border-gray-600 text-center"
+        >
+          <div
+            class="bg-purple-100 dark:bg-purple-900/30 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+          >
+            <i
+              class="fas fa-truck text-2xl text-purple-600 dark:text-purple-400"
+            ></i>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+            Envío Rápido
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400">
+            Envío gratuito en pedidos superiores a $300.000 y entrega el mismo
+            día en ciudades principales.
+          </p>
+        </div>
+
+        <!-- Característica 2 -->
+        <div
+          class="bg-white dark:bg-gray-700 rounded-xl p-8 shadow-lg border border-gray-100 dark:border-gray-600 text-center"
+        >
+          <div
+            class="bg-blue-100 dark:bg-blue-900/30 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+          >
+            <i
+              class="fas fa-shield-alt text-2xl text-blue-600 dark:text-blue-400"
+            ></i>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+            Garantía Extendida
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400">
+            Todos nuestros productos incluyen garantía extendida de 2 años
+            contra defectos de fabricación.
+          </p>
+        </div>
+
+        <!-- Característica 3 -->
+        <div
+          class="bg-white dark:bg-gray-700 rounded-xl p-8 shadow-lg border border-gray-100 dark:border-gray-600 text-center"
+        >
+          <div
+            class="bg-purple-100 dark:bg-purple-900/30 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+          >
+            <i
+              class="fas fa-headset text-2xl text-purple-600 dark:text-purple-400"
+            ></i>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+            Soporte 24/7
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400">
+            Nuestro equipo de soporte técnico está disponible las 24 horas para
+            resolver tus dudas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- barra decorativa -->
+  <section
+    class="py-7 bg-gradient-to-r from-purple-600 to-blue-600 relative overflow-hidden"
+  >
+
+  </section>
+
+  <!-- Categorías en Grid -->
+  <section class="py-16 bg-gray-100 dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+          Explora Nuestras <span class="text-purple-600 dark:text-purple-500"
+            >Categorías</span
+          >
+        </h2>
+        <p class="text-gray-600 dark:text-gray-400 mt-3 max-w-2xl mx-auto">
+          Encuentra el dispositivo perfecto para ti en nuestras categorías
+          principales.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Celulares -->
+        <a
+          href="/productos/celulares"
+          class="group relative overflow-hidden rounded-xl shadow-lg"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-purple-900/90 to-blue-900/90 z-10"
+          >
+          </div>
+          <img
+            src="/images/category-smartphones.jpeg"
+            alt="Smartphones"
+            class="w-full h-64 object-cover object-center transform group-hover:scale-110 transition duration-500"
+          />
+          <div
+            class="absolute inset-0 z-20 flex items-center justify-center p-8"
+          >
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-white mb-2">Smartphones</h3>
+              <p class="text-gray-200 mb-4">
+                Los últimos smartphones con diseño futurista y rendimiento
+                excepcional.
+              </p>
+              <span
+                class="inline-block px-4 py-2 border border-white/50 rounded-full text-white text-sm backdrop-blur-sm hover:bg-white/20 transition"
+              >
+                Ver colección
+                <i class="fas fa-arrow-right ml-2"></i>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Portátiles -->
+        <a
+          href="/productos/portatiles"
+          class="group relative overflow-hidden rounded-xl shadow-lg"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-blue-900/90 to-purple-900/90 z-10"
+          >
+          </div>
+          <img
+            src="/images/category-laptops.jpeg"
+            alt="Portátiles"
+            class="w-full h-64 object-cover object-center transform group-hover:scale-110 transition duration-500"
+          />
+          <div
+            class="absolute inset-0 z-20 flex items-center justify-center p-8"
+          >
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-white mb-2">Portátiles</h3>
+              <p class="text-gray-200 mb-4">
+                Potencia y portabilidad con nuestros portátiles de última
+                generación.
+              </p>
+              <span
+                class="inline-block px-4 py-2 border border-white/50 rounded-full text-white text-sm backdrop-blur-sm hover:bg-white/20 transition"
+              >
+                Ver colección
+                <i class="fas fa-arrow-right ml-2"></i>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        <!-- Tablets -->
+        <a
+          href="/productos/tablets"
+          class="group relative overflow-hidden rounded-xl shadow-lg"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-purple-900/90 to-indigo-900/90 z-10"
+          >
+          </div>
+          <img
+            src="/images/category-tablets.jpeg"
+            alt="Tablets"
+            class="w-full h-48 object-cover object-center transform group-hover:scale-110 transition duration-500"
+          />
+          <div
+            class="absolute inset-0 z-20 flex items-center justify-center p-6"
+          >
+            <div class="text-center">
+              <h3 class="text-xl font-bold text-white mb-2">Tablets</h3>
+              <p class="text-gray-200 mb-3 text-sm">
+                Versatilidad y potencia en tus manos.
+              </p>
+              <span
+                class="inline-block px-3 py-1 border border-white/50 rounded-full text-white text-xs backdrop-blur-sm hover:bg-white/20 transition"
+              >
+                Ver colección
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Smartwatches -->
+        <a
+          href="/productos/relojes"
+          class="group relative overflow-hidden rounded-xl shadow-lg"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-blue-900/90 to-cyan-900/90 z-10"
+          >
+          </div>
+          <img
+            src="/images/category-watches.jpeg"
+            alt="Smartwatches"
+            class="w-full h-48 object-cover object-center transform group-hover:scale-110 transition duration-500"
+          />
+          <div
+            class="absolute inset-0 z-20 flex items-center justify-center p-6"
+          >
+            <div class="text-center">
+              <h3 class="text-xl font-bold text-white mb-2">Smartwatches</h3>
+              <p class="text-gray-200 mb-3 text-sm">
+                Tecnología avanzada en tu muñeca.
+              </p>
+              <span
+                class="inline-block px-3 py-1 border border-white/50 rounded-full text-white text-xs backdrop-blur-sm hover:bg-white/20 transition"
+              >
+                Ver colección
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Accesorios -->
+        <a
+          href="/productos/accesorios"
+          class="group relative overflow-hidden rounded-xl shadow-lg"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-indigo-900/90 to-purple-900/90 z-10"
+          >
+          </div>
+          <img
+            src="/images/category-accessories.jpeg"
+            alt="Accesorios"
+            class="w-full h-48 object-cover object-center transform group-hover:scale-110 transition duration-500"
+          />
+          <div
+            class="absolute inset-0 z-20 flex items-center justify-center p-6"
+          >
+            <div class="text-center">
+              <h3 class="text-xl font-bold text-white mb-2">Accesorios</h3>
+              <p class="text-gray-200 mb-3 text-sm">
+                Complementa tus dispositivos con lo mejor.
+              </p>
+              <span
+                class="inline-block px-3 py-1 border border-white/50 rounded-full text-white text-xs backdrop-blur-sm hover:bg-white/20 transition"
+              >
+                Ver colección
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
