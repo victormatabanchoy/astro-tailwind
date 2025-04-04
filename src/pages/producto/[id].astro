@@ -27,6 +27,7 @@ const productosRelacionados = productos
 
 <!-- src/pages/producto/[id].astro -->
 <MainLayout title={producto.nombre}>
+  
   <!-- Sección de detalle de producto -->
   <section class="py-12 bg-gray-50 dark:bg-gray-900">
     <div class="container mx-auto px-4">
@@ -76,7 +77,7 @@ const productosRelacionados = productos
           <!-- Miniaturas (simuladas) -->
           <div class="grid grid-cols-4 gap-2">
             {
-              [1, 2, 3, 4].map(() => (
+              [1, 2, 3,].map(() => (
                 <button class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-purple-500 transition">
                   <img
                     src={producto.imagen}
