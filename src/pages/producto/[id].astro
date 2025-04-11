@@ -2,7 +2,8 @@
 import MainLayout from "../../layouts/MainLayout.astro";
 import productos from "../../data/productos.json";
 
-// Get the product id from the URL
+// producto del JSON se convierte en una ruta, 
+// pasando su ID como parámetro y sus datos como props.
 export async function getStaticPaths() {
   return productos.map((producto) => ({
     params: { id: producto.id.toString() },
@@ -22,7 +23,7 @@ const precioFormateado = new Intl.NumberFormat("es-CO", {
 // Obtener productos relacionados (misma categoría, excepto el actual)
 const productosRelacionados = productos
   .filter((p) => p.categoria === producto.categoria && p.id !== producto.id)
-  .slice(0, 4);
+  .slice(0, );
 ---
 
 <!-- src/pages/producto/[id].astro -->
@@ -37,15 +38,7 @@ const productosRelacionados = productos
           class="text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
           >Inicio</a
         >
-        <span class="mx-2 text-gray-500 dark:text-gray-400">/</span>
-        <a
-          href={`/productos/${producto.categoria}`}
-          class="text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400"
-          >{
-            producto.categoria.charAt(0).toUpperCase() +
-              producto.categoria.slice(1)
-          }</a
-        >
+       
         <span class="mx-2 text-gray-500 dark:text-gray-400">/</span>
         <span class="text-gray-700 dark:text-gray-300">{producto.nombre}</span>
       </nav>
@@ -54,14 +47,14 @@ const productosRelacionados = productos
         <!-- Galería de producto -->
         <div class="space-y-4">
           <div
-            class="relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg aspect-square"
+            class="relative bg-white dark:bg--800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg aspect-square"
           >
             <img
               src={producto.imagen}
               alt={producto.nombre}
               class="w-full h-full object-contain p-8"
             />
-            <!-- Badge de categoría -->
+            <!-- Badge de categoría izquierda superior -->
             <div class="absolute top-4 left-4">
               <span
                 class="px-2 py-1 text-xs rounded-full bg-black/70 text-white backdrop-blur-sm font-medium"
